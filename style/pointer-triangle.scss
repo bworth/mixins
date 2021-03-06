@@ -1,0 +1,55 @@
+/// Creates a simple CSS pointer shape (triangle) without having to use images or SVG.
+/// The pointer is placed on the container based on the supplied `$direction`, e.g. on the top of the container if
+///     `$direction` is `up`, and is centered on the container in the other dimension.
+///
+/// @param {String} $direction - One of `up`, `down`, `left`, `right`
+/// @param {Number} $size - Size of the pointer
+/// @param {Number} $color [currentcolor] - Colour of the pointer
+/// @param {Number} $border-width [0] - Width of the pointer border
+/// @param {Number} $border-color [currentcolor] - Colour of the pointer border
+/// @content Any additional properties required, e.g. changing the pointer central positioning
+/// @group style
+/// @author Ben Worthington
+@mixin pointer-triangle($direction, $size, $color: currentcolor, $border-width: 0, $border-color: currentcolor) {
+	&::before {
+		border: $size + $border-width solid transparent;
+		content: '';
+		position: absolute;
+
+		@if $direction == down {
+			border-top-color: $color;
+			left: calc(50% - #{$size + $border-width});
+			top: 100%;
+
+			@if $border-width and $border-width != 0 {
+				filter: drop-shadow(0 $border-width $border-color);
+			}
+		} @else if $direction == left {
+			border-right-color: $color;
+			right: 100%;
+			top: calc(50% - #{$size + $border-width});
+
+			@if $border-width and $border-width != 0 {
+				filter: drop-shadow(-$border-width 0 $border-color);
+			}
+		} @else if $direction == right {
+			border-left-color: $color;
+			left: 100%;
+			top: calc(50% - #{$size + $border-width});
+
+			@if $border-width and $border-width != 0 {
+				filter: drop-shadow($border-width 0 $border-color);
+			}
+		} @else if $direction == up {
+			border-bottom-color: $color;
+			bottom: 100%;
+			left: calc(50% - #{$size + $border-width});
+
+			@if $border-width and $border-width != 0 {
+				filter: drop-shadow(0 (-$border-width) $border-color);
+			}
+		}
+
+		@content;
+	}
+}

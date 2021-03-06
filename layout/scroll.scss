@@ -1,0 +1,28 @@
+////
+/// Scrollable content mixins.
+///
+/// @group layout
+/// @author Ben Worthington
+////
+
+/// Scroll content horizontally.
+///
+/// @require {mixin} clearfix
+@mixin scroll-x {
+	@include clearfix; // Include margins as scrollable content in Safari
+
+	-webkit-overflow-scrolling: touch; // No longer required as of iOS 13
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+/// Scroll content vertically.
+///
+/// @require {mixin} clearfix
+@mixin scroll-y {
+	@include clearfix; // Include margins as scrollable content in Safari
+
+	-webkit-overflow-scrolling: touch; // No longer required as of iOS 13
+	overflow-x: hidden;
+	overflow-y: auto;
+}

@@ -1,0 +1,19 @@
+/// Arrange an ordered or unordered list of items in a grid.
+///
+/// @param {Number} $column-min - Minimum width for grid columns
+/// @param {Number} $column-max [null] - Maximum width for grid columns
+/// @param {Number | String} $repetitions [auto-fill] - Grid `repeat()` repetitions
+/// @require {mixin} reset-list
+/// @group layout
+/// @author Ben Worthington
+@mixin grid-list($column-min, $column-max: null, $repetitions: auto-fill) {
+	@include reset-list;
+
+	display: grid;
+	grid-template-columns: repeat($repetitions, minmax(min($column-min, 100%), if($column-max, max-content, 1fr)));
+
+	> li {
+		max-width: 100%;
+		width: $column-max;
+	}
+}

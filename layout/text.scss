@@ -1,0 +1,18 @@
+/// Common styling for standard text copy.
+///
+/// @param {Number} $margin-block-end [null] - Margin between block elements
+/// @group layout
+/// @author Ben Worthington
+@mixin text($margin-block-end: null) {
+	address,
+	li,
+	ol,
+	p,
+	ul {
+		margin: 0;
+
+		&:not(:last-child) {
+			margin-block-end: $margin-block-end;
+		}
+	}
+}

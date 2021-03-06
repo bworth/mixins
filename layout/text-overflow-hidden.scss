@@ -1,0 +1,10 @@
+/// Limits text to a single line and truncates it to prevent any overflow of its container.
+///
+/// @param {String} $text-overflow [ellipsis] - Value for the `text-overflow` property
+/// @group layout
+/// @author Ben Worthington
+@mixin text-overflow-hidden($text-overflow: ellipsis) {
+	overflow: hidden;
+	text-overflow: $text-overflow;
+	white-space: nowrap;
+}

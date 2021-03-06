@@ -1,0 +1,78 @@
+////
+/// Set of simple mixins for setting position values.
+///
+/// @group position
+/// @author Ben Worthington
+////
+
+/// Position mixin, sets all the position properties.
+/// Follows the same `top`, `right`, `bottom`, `left` order as other layout properties.
+/// Shorthands can also be used, e.g. one value equates to the same value for all, two values equate to vertical and
+/// horizontal values, and three values equates to `top`, horizontal and `bottom` values.
+///
+/// @param {Number} $top [0] - Value for the `top` property
+/// @param {Number} $right [$top] - Value for the `right` property
+/// @param {Number} $bottom [$top] - Value for the `bottom` property
+/// @param {Number} $left [$right] - Value for the `left` property
+@mixin position($top: 0, $right: $top, $bottom: $top, $left: $right) {
+	bottom: $bottom;
+	left: $left;
+	right: $right;
+	top: $top;
+}
+
+/// Apply absolute positioning with the supplied values.
+///
+/// @param {List} $args - Values for the `top`, `right`, `bottom`, `left` properties (in that order), shorthands can
+///     also be used, e.g. one, two, or three values
+/// @require {mixin} position
+/// @see {mixin} fixed
+/// @see {mixin} relative
+/// @see {mixin} sticky
+@mixin absolute($args...) {
+	@include position($args...);
+
+	position: absolute;
+}
+
+/// Apply fixed positioning with the supplied values.
+///
+/// @param {List} $args - Values for the `top`, `right`, `bottom`, `left` properties (in that order), shorthands can
+///     also be used, e.g. one, two, or three values
+/// @require {mixin} position
+/// @see {mixin} absolute
+/// @see {mixin} relative
+/// @see {mixin} sticky
+@mixin fixed($args...) {
+	@include position($args...);
+
+	position: fixed;
+}
+
+/// Apply relative positioning with the supplied values.
+///
+/// @param {List} $args - Values for the `top`, `right`, `bottom`, `left` properties (in that order), shorthands can
+///     also be used, e.g. one, two, or three values
+/// @require {mixin} position
+/// @see {mixin} absolute
+/// @see {mixin} fixed
+/// @see {mixin} sticky
+@mixin relative($args...) {
+	@include position($args...);
+
+	position: relative;
+}
+
+/// Apply sticky positioning with the supplied values.
+///
+/// @param {List} $args - Values for the `top`, `right`, `bottom`, `left` properties (in that order), shorthands can
+///     also be used, e.g. one, two, or three values
+/// @require {mixin} position
+/// @see {mixin} absolute
+/// @see {mixin} fixed
+/// @see {mixin} relative
+@mixin sticky($args...) {
+	@include position($args...);
+
+	position: sticky;
+}

@@ -1,0 +1,46 @@
+////
+/// Set of simple reset mixins.
+///
+/// @group resets
+/// @author Ben Worthington
+////
+
+/// Removes active element highlighting and annotation common to mobile devices.
+@mixin remove-highlighting {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+}
+
+/// Useful for removing anchor styling from components that are contained in an `<a>`.
+@mixin reset-anchor {
+	color: unset;
+	text-decoration: unset;
+}
+
+/// Only apply focus style when the browser determines that it should be made evident on the element.
+///
+/// @link https://css-tricks.com/the-focus-visible-trick
+@mixin reset-focus {
+	&:focus:not(:focus-visible) {
+		outline: unset;
+	}
+}
+
+/// Reset ordered and unordered lists.
+///
+/// @param {Number} $item-margin-block-end [null] - Margin between block elements
+@mixin reset-list($item-margin-block-end: null) {
+	list-style: none;
+	margin: unset;
+	padding: unset;
+
+	// > li:not(:last-child) {
+	// 	margin-block-end: $item-margin-block-end;
+	// }
+}
+
+/// Reset `text-size-adjust`.
+@mixin reset-text-size-adjust {
+	-webkit-text-size-adjust: 100%; // stylelint-disable-line property-no-vendor-prefix
+	text-size-adjust: none;
+}

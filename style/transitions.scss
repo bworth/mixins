@@ -1,0 +1,82 @@
+////
+/// Set of mixins for adding transition classes for a React Transition Group `CSSTransition`.
+///
+/// @link https://reactcommunity.org/react-transition-group/css-transition React Transition Group CSSTransition
+/// @group style
+/// @author Ben Worthington
+////
+
+/// Adds `opacity` transition (fade in/out) classes for a React Transition Group `CSSTransition`.
+///
+/// @param {Number | List} $enter-timing - Transition timing property values to be added to the appear/enter transition
+///     declaration, can include duration, delay, timing-function values
+/// @param {Number | List} $exit-timing [$enter-timing] - Transition timing property values to be added to the exit
+///     transition declaration, can include duration, delay, timing-function values
+@mixin transition-opacity($enter-timing, $exit-timing: $enter-timing) {
+	&.appear,
+	&.enter {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&.appear-active,
+	&.enter-active {
+		opacity: 1;
+		transition: opacity $enter-timing;
+	}
+
+	&.exit {
+		pointer-events: none;
+	}
+
+	&.exit-active {
+		opacity: 0;
+		transition: opacity $exit-timing;
+	}
+
+	@media (prefers-reduced-motion) {
+		&.appear-active,
+		&.enter-active,
+		&.exit-active {
+			transition: unset;
+		}
+	}
+}
+
+/// Adds `transform` transition classes for a React Transition Group `CSSTransition`.
+///
+/// @param {String} $start-transform - The `transform` value for the start position of the transition
+/// @param {Number | List} $enter-timing - Transition timing property values to be added to the appear/enter transition
+///     declaration, can include duration, delay, timing-function values
+/// @param {Number | List} $exit-timing [$enter-timing] - Transition timing property values to be added to the exit
+///     transition declaration, can include duration, delay, timing-function values
+@mixin transition-transform($start-transform, $enter-timing, $exit-timing: $enter-timing) {
+	&.appear,
+	&.enter {
+		pointer-events: none;
+		transform: $start-transform;
+	}
+
+	&.appear-active,
+	&.enter-active {
+		transform: unset;
+		transition: transform $enter-timing;
+	}
+
+	&.exit {
+		pointer-events: none;
+	}
+
+	&.exit-active {
+		transform: $start-transform;
+		transition: transform $exit-timing;
+	}
+
+	@media (prefers-reduced-motion) {
+		&.appear-active,
+		&.enter-active,
+		&.exit-active {
+			transition: unset;
+		}
+	}
+}

@@ -1,0 +1,15 @@
+/// Clearfix.
+///
+/// @link https://stackoverflow.com/questions/211383/what-methods-of-clearfix-can-i-use
+/// @group layout
+/// @author Ben Worthington
+@mixin clearfix {
+	&::after {
+		align-self: flex-end;
+		clear: both;
+		content: '';
+		display: block;
+		height: 1px; // Zero height elements don't affect layout in Safari
+		margin-top: -1px;
+	}
+}

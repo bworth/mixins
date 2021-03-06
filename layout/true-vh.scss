@@ -1,0 +1,19 @@
+/// iOS reports the same viewport height in `vh` units whether Safari UI elements are visible or not.
+/// To fix this we create a more accurate CSS custom property, set via JavaScript.
+///
+/// @param {String} $property - Height property to be used (`height`, `min-height`, `padding-block-start` etc.)
+/// @param {Number} $vh-height - Required `vh` height value (unitless)
+/// @param {Number} $height-delta [null] - Any additional non-`vh` height value to be added or subtracted
+/// @example javascript - Set the CSS custom property with this companion script
+///     document.documentElement.style.setProperty('--vhUnit', window.innerHeight / 100 + 'px');
+/// @example scss - Using this mixin to set a `min-height` of `80vh` - `64px`
+///     @include true-vh(min-height, 80, -64px);
+/// @group layout
+/// @author Ben Worthington
+@mixin true-vh($property, $vh-height, $height-delta: null) {
+	@if $height-delta {
+		#{$property}: calc(var(--vhUnit, 1vh) * #{$vh-height} + #{$height-delta});
+	} @else {
+		#{$property}: calc(var(--vhUnit, 1vh) * #{$vh-height});
+	}
+}

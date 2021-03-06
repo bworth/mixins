@@ -1,0 +1,30 @@
+////
+/// Mixins for matching a set number of siblings.
+///
+/// @group layout
+/// @author Ben Worthington
+////
+
+/// Matches when the selector is one of `$count` siblings.
+///
+/// @param {Number} $count - Number of siblings required for a match
+/// @param {String} $selector [&] - Selector for the siblings, if different to the current selector
+/// @content Styles to be applied if the selector is one of `$count` siblings
+@mixin siblings-count($count, $selector: &) {
+	&:first-child:nth-last-child(#{$count}),
+	&:first-child:nth-last-child(#{$count}) ~ #{$selector} {
+		@content;
+	}
+}
+
+/// Matches when the selector is one of `$count` siblings of the same type.
+///
+/// @param {Number} $count - Number of siblings of the same type required for a match
+/// @param {String} $selector [&] - Selector for the siblings, if different to the current selector
+/// @content Styles to be applied if the selector is one of `$count` siblings of the same type
+@mixin siblings-of-type-count($count, $selector: &) {
+	&:first-of-type:nth-last-of-type(#{$count}),
+	&:first-of-type:nth-last-of-type(#{$count}) ~ #{$selector} {
+		@content;
+	}
+}

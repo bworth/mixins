@@ -1,0 +1,28 @@
+/// Restricts text to a set number of lines.
+///
+/// @param {Number} $num-lines - The number of lines required
+/// @param {Number} $line-height - The height of each line of text
+/// @param {Boolean} $fixed-total-height [true] - If `true` the container will always be the height of the required
+///     number of lines, even if there is not enough text content to fill that many lines
+/// @param {String} $text-overflow [ellipsis] - Value for the `text-overflow` property
+/// @group layout
+/// @author Ben Worthington
+@mixin line-clamp($num-lines, $line-height, $fixed-total-height: true, $text-overflow: ellipsis) {
+	$total-height: $num-lines * if(unitless($line-height), $line-height * 1em, $line-height);
+
+	// Blink/WebKit only
+	/* autoprefixer: ignore next */
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $num-lines;
+	display: -webkit-box;
+
+	// Fallback
+	@if $fixed-total-height {
+		height: $total-height;
+	} @else {
+		max-height: $total-height;
+	}
+
+	overflow: hidden;
+	text-overflow: $text-overflow;
+}

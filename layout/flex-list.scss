@@ -1,0 +1,37 @@
+/// Common styling for an ordered or unordered list of items.
+///
+/// @param {Number} $item-margin [null] - Margin between items
+/// @param {Boolean} $inline [false] - Container block (default) or inline layout
+/// @param {String} $direction [null] - Container flex direction
+/// @param {String} $wrap [null] - Container flex wrap
+/// @require {mixin} reset-list
+/// @group layout
+/// @author Ben Worthington
+@mixin flex-list($item-margin: null, $inline: false, $direction: null, $wrap: null) {
+	@include reset-list;
+
+	@if $inline {
+		display: inline-flex;
+		margin-inline-end: $item-margin / -2;
+		margin-inline-start: $item-margin / -2;
+	} @else {
+		display: flex;
+		margin-block-end: $item-margin / -2;
+		margin-block-start: $item-margin / -2;
+	}
+
+	flex-direction: $direction;
+	flex-wrap: $wrap;
+
+	> li {
+		flex-shrink: 0;
+
+		@if not $direction or $direction == row or $direction == row-reverse {
+			margin-inline-end: $item-margin / 2;
+			margin-inline-start: $item-margin / 2;
+		} else {
+			margin-block-end: $item-margin / 2;
+			margin-block-start: $item-margin / 2;
+		}
+	}
+}

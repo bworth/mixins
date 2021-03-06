@@ -1,0 +1,40 @@
+////
+/// Mixins for responsive layouts.
+///
+/// @group layout
+/// @author Ben Worthington
+////
+
+/// Simple height breakpoint mixin for responsive layouts.
+/// Values are pixel based, since screens are pixel based, and the upper value is reduced by one pixel to avoid clashes.
+/// If the lower value is `0` or `null` then an upper value must be specified.
+///
+/// @param {Number} $from - The lower value of the matching height, `0` or `null` if there is no non-zero lower value
+/// @param {Number} $to [null] - The upper value of the matching height, if required
+/// @content The content applied if the media query matches
+@mixin height($from, $to: null) {
+	@if $from == 0 or not $from {
+		@media screen and (max-height: $to - 1px) { @content; }
+	} @else if not $to {
+		@media screen and (min-height: $from) { @content; }
+	} @else {
+		@media screen and (min-height: $from) and (max-height: $to - 1px) { @content; }
+	}
+}
+
+/// Simple width breakpoint mixin for responsive layouts.
+/// Values are pixel based, since screens are pixel based, and the upper value is reduced by one pixel to avoid clashes.
+/// If the lower value is `0` or `null` then an upper value must be specified.
+///
+/// @param {Number} $from - The lower value of the matching width, `0` or `null` if there is no non-zero lower value
+/// @param {Number} $to [null] - The upper value of the matching width, if required
+/// @content The content applied if the media query matches
+@mixin width($from, $to: null) {
+	@if $from == 0 or not $from {
+		@media screen and (max-width: $to - 1px) { @content; }
+	} @else if not $to {
+		@media screen and (min-width: $from) { @content; }
+	} @else {
+		@media screen and (min-width: $from) and (max-width: $to - 1px) { @content; }
+	}
+}
